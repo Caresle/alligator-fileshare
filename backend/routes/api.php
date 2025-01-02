@@ -8,3 +8,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/', fn () => 'Alligator api');
+
+Route::resource('files', App\Http\Controllers\FilesController::class);
