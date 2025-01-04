@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\FileResource;
+use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,8 +14,10 @@ class FilesController extends Controller
      */
     public function index()
     {
-        dd(asset('storage/Screenshot from 2024-12-30 15-54-58.png'));
-        return response()->json([]);
+        // dd(asset('storage/Screenshot from 2024-12-30 15-54-58.png'));
+        $files_raw = File::query()->get();
+        $files = FileResource::collection($files_raw);
+        return response()->json($files);
     }
 
     /**
@@ -26,6 +30,11 @@ class FilesController extends Controller
         $file = $form_data["file"];
         $file_name = $file->getClientOriginalName();
 
+        File::query()->create([
+            'file_name' => $file_name,
+            'path' => "storage/" . $file_name
+        ]);
+
         Storage::disk('public')->put($file_name, file_get_contents($file));
         return response()->json("ok");
     }
@@ -33,9 +42,9 @@ class FilesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(File $file)
     {
-        //
+        return response()->json(new FileResource($file));
     }
 
     /**
