@@ -1,6 +1,7 @@
 import React from "react"
 import { createBrowserRouter, RouteObject } from "react-router-dom"
 import Icons from "../components/shared/Icons"
+import HomePage from "../app/page"
 
 export type RouteObjectWithMeta = RouteObject & {
 	meta?: {
@@ -13,7 +14,7 @@ export type RouteObjectWithMeta = RouteObject & {
 const routesApp: RouteObjectWithMeta[] = [
 	{
 		path: "/",
-		element: <>HOME PAGE</>,
+		element: <HomePage />,
 		meta: {
 			showInNavbar: true,
 			name: "Home",
