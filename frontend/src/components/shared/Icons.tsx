@@ -32,6 +32,7 @@ import {
 	LuCircleCheck,
 	LuRocket,
 	LuCircleSlash,
+	LuDownload,
 } from "react-icons/lu"
 
 const Icons = {
@@ -62,6 +63,7 @@ const Icons = {
 		Save: LuSave,
 		Logout: LuLogOut,
 		Add: LuCirclePlus,
+		Download: LuDownload,
 		Confirm: LuCircleCheckBig,
 		Cancel: LuCircleX,
 		ExportExcel: LuFileSpreadsheet,

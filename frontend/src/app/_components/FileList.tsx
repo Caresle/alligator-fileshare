@@ -1,5 +1,47 @@
 import Icons from "../../components/shared/Icons"
-import { Button } from "@nextui-org/react"
+import {
+	Button,
+	Dropdown,
+	DropdownItem,
+	DropdownMenu,
+	DropdownTrigger,
+} from "@nextui-org/react"
+import { useFileDeleteState } from "../_states/useFileDelete"
+
+const Actions = () => {
+	const { update } = useFileDeleteState(state => state)
+
+	return (
+		<Dropdown>
+			<DropdownTrigger>
+				<Button isIconOnly variant="flat">
+					<Icons.MenuType.Horizontal />
+				</Button>
+			</DropdownTrigger>
+			<DropdownMenu>
+				<DropdownItem
+					key={1}
+					startContent={<Icons.Actions.Download className="size-5" />}
+				>
+					Download
+				</DropdownItem>
+				<DropdownItem
+					key={2}
+					startContent={<Icons.Actions.Edit className="size-5" />}
+				>
+					Rename
+				</DropdownItem>
+				<DropdownItem
+					onPress={() => update({ show: true })}
+					key={3}
+					startContent={<Icons.Actions.Delete className="size-5" />}
+				>
+					Delete
+				</DropdownItem>
+			</DropdownMenu>
+		</Dropdown>
+	)
+}
 
 export default function FileList() {
 	return (
@@ -20,9 +62,7 @@ export default function FileList() {
 							<div className="text-sm font-semibold truncate">{i}.png</div>
 							<div className="text-xs text-slate-400">{i} MB</div>
 						</div>
-						<Button isIconOnly variant="flat">
-							<Icons.MenuType.Horizontal />
-						</Button>
+						<Actions />
 					</div>
 				))}
 			</div>
