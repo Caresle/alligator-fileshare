@@ -21,7 +21,8 @@ export default function RenameModal() {
 			<ModalContent>
 				<ModalHeader>Rename File</ModalHeader>
 				<ModalBody>
-					<Input placeholder="Enter new name" />
+					<Input label="Old Name" />
+					<Input placeholder="Enter new name" label="New Name" />
 				</ModalBody>
 				<ModalFooter>
 					<Button onPress={() => update({ show: false })}>Close</Button>

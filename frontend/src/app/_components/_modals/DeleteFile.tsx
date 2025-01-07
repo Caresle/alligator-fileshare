@@ -1,5 +1,6 @@
 import {
 	Button,
+	Chip,
 	Modal,
 	ModalBody,
 	ModalContent,
@@ -9,7 +10,7 @@ import {
 import { useFileDeleteState } from "../../_states/useFileDelete"
 
 export default function DeleteFile() {
-	const { show, update } = useFileDeleteState(state => state)
+	const { show, update, item } = useFileDeleteState(state => state)
 
 	return (
 		<Modal
@@ -19,7 +20,12 @@ export default function DeleteFile() {
 		>
 			<ModalContent>
 				<ModalHeader>Delete File</ModalHeader>
-				<ModalBody>Are you sure you want to delete this file?</ModalBody>
+				<ModalBody>
+					<div>
+						Are you sure you want to delete
+						<Chip>{item.fileName}</Chip>?
+					</div>
+				</ModalBody>
 				<ModalFooter>
 					<Button onPress={() => update({ show: false })}>Close</Button>
 					<Button onPress={() => update({ show: false })} color="danger">
