@@ -7,10 +7,11 @@ import {
 	DropdownTrigger,
 } from "@nextui-org/react"
 import { useFileDeleteState } from "../_states/useFileDelete"
+import { useFileState } from "../_states/useFileState"
 
 const Actions = () => {
 	const { update } = useFileDeleteState(state => state)
-
+	const { update: updateFile } = useFileState(state => state)
 	return (
 		<Dropdown>
 			<DropdownTrigger>
@@ -26,6 +27,7 @@ const Actions = () => {
 					Download
 				</DropdownItem>
 				<DropdownItem
+					onPress={() => updateFile({ show: true })}
 					key={2}
 					startContent={<Icons.Actions.Edit className="size-5" />}
 				>
