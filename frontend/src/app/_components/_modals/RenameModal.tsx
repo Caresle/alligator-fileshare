@@ -10,7 +10,7 @@ import {
 import { useFileState } from "../../_states/useFileState"
 
 export default function RenameModal() {
-	const { show, update } = useFileState(state => state)
+	const { show, update, item } = useFileState(state => state)
 
 	return (
 		<Modal
@@ -21,7 +21,7 @@ export default function RenameModal() {
 			<ModalContent>
 				<ModalHeader>Rename File</ModalHeader>
 				<ModalBody>
-					<Input label="Old Name" />
+					<Input label="Old Name" disabled value={item.fileName} />
 					<Input placeholder="Enter new name" label="New Name" />
 				</ModalBody>
 				<ModalFooter>
