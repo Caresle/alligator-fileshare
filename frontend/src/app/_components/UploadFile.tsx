@@ -2,11 +2,30 @@ import { useDropzone } from "react-dropzone"
 import Icons from "../../components/shared/Icons"
 import { useCallback } from "react"
 import { cn } from "@nextui-org/react"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { fileService } from "../../services/file.service"
+import { queryKeys } from "../../constants/queryKeys"
 
 export default function UploadFile() {
-	const onDrop = useCallback(acceptedFiles => {
-		console.log(acceptedFiles)
-	}, [])
+	const queryClient = useQueryClient()
+
+	const mut = useMutation({
+		mutationFn: fileService.post.one,
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: [queryKeys.FILES],
+			})
+		},
+	})
+
+	const onDrop = useCallback(
+		(acceptedFiles: File[]) => {
+			const formData = new FormData()
+			formData.append("file", acceptedFiles[0])
+			mut.mutate(formData)
+		},
+		[mut]
+	)
 
 	const { getRootProps, getInputProps, isDragActive } = useDropzone({
 		onDrop,

@@ -15,4 +15,17 @@ export const fileService = {
 			}
 		},
 	},
+	post: {
+		one: async (formData: FormData) => {
+			try {
+				await client.post(`${BASE_ROUTE}`, formData, {
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				})
+			} catch (error) {
+				console.error(error)
+			}
+		},
+	},
 }
