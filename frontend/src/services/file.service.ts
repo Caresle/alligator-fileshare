@@ -28,4 +28,13 @@ export const fileService = {
 			}
 		},
 	},
+	delete: {
+		one: async (id: string) => {
+			try {
+				await client.delete(`${BASE_ROUTE}/${id}`)
+			} catch (error) {
+				console.error(error)
+			}
+		},
+	},
 }
