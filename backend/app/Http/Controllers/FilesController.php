@@ -44,7 +44,18 @@ class FilesController extends Controller
      */
     public function show(File $file)
     {
-        return response()->json(new FileResource($file));
+        if (!Storage::disk('public')->exists($file->file_name)) {
+            return response()->json(['message' => 'File not found'], 404);
+        }
+
+        $file_path = Storage::disk('public')->path($file->file_name);
+        $file_content = file_get_contents($file_path);
+        $mime_type = Storage::disk('public')->mimeType($file->file_name);
+
+        return response($file_content, 200, [
+            'Content-Type' => $mime_type,
+            'Content-Disposition' => 'attachment; filename=' . $file->file_name
+        ]);
     }
 
     /**

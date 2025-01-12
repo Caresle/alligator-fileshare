@@ -8,7 +8,7 @@ import {
 } from "@nextui-org/react"
 import { useFileDeleteState } from "../_states/useFileDelete"
 import { useFileState } from "../_states/useFileState"
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import { queryKeys } from "../../constants/queryKeys"
 import { fileService } from "../../services/file.service"
 import { useMemo } from "react"
@@ -17,6 +17,14 @@ import { FileEntity } from "../../entities/file.entity"
 const Actions = ({ item }: { item: FileEntity }) => {
 	const { update } = useFileDeleteState(state => state)
 	const { update: updateFile } = useFileState(state => state)
+	const mut = useMutation({
+		mutationFn: fileService.get.one,
+	})
+
+	const onDownload = () => {
+		mut.mutate(item.id)
+	}
+
 	return (
 		<Dropdown>
 			<DropdownTrigger>
@@ -28,6 +36,7 @@ const Actions = ({ item }: { item: FileEntity }) => {
 				<DropdownItem
 					key={1}
 					startContent={<Icons.Actions.Download className="size-5" />}
+					onPress={onDownload}
 				>
 					Download
 				</DropdownItem>
