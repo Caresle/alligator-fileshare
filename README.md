@@ -1,5 +1,9 @@
 # Alligator Fileshare
 
-![](./assets/Croki.png)
-This is a fileshare application that allows users to share files with each other.
-In a local network
+<p align="center">
+  <img src="assets/Croki.png">
+</p>
+
+<p align="center">
+Personal file storage app, similar to google drive but for local use
+</p>
