@@ -33,6 +33,7 @@ import {
 	LuRocket,
 	LuCircleSlash,
 	LuDownload,
+	LuFolder,
 } from "react-icons/lu"
 
 const Icons = {
@@ -81,6 +82,7 @@ const Icons = {
 		Csv: LuFileSpreadsheet,
 		Pdf: LuFileText,
 		Image: LuFileImage,
+		Folder: LuFolder,
 	},
 }
 
